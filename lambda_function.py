@@ -24,7 +24,7 @@ def get_current_year_quarter():
 def lambda_handler(event, context):
     """
     The main entry point for the AWS Lambda function.
-    This function performs the entire ETL process.
+    This function performs the entire ETL process for a single quarter.
     """
     if not S3_BUCKET_NAME or not GLUE_CRAWLER_NAME:
         error_message = "Error: S3_BUCKET_NAME and GLUE_CRAWLER_NAME environment variables must be set."
@@ -32,9 +32,6 @@ def lambda_handler(event, context):
         return {'statusCode': 400, 'body': error_message}
 
     # Determine the year and quarter to process.
-    # Note: SEC data is often released a few weeks after a quarter ends.
-    # For a production system, you might want to process the *previous* quarter.
-    # For this example, we'll use the current year and quarter.
     YEAR, QUARTER = get_current_year_quarter()
     
     # Lambda's only writable directory is /tmp. We'll use it for all temporary files.
@@ -51,7 +48,12 @@ def lambda_handler(event, context):
     try:
         print("Step 1: Fetching data from SEC EDGAR...")
         sec_url = f"https://www.sec.gov/files/dera/data/financial-statement-data-sets/{YEAR}q{QUARTER}.zip"
-        headers = {'User-Agent': "Yash Jadhav yash918jadhav@gmail.com"}
+        
+        # --- Placeholder for User-Agent ---
+        # The SEC requests a User-Agent header for identification purposes.
+        # Replace the placeholders with your own information.
+        headers = {'User-Agent': "[Your Name or Company Name] [Your Email Address]"}
+        
         response = requests.get(sec_url, headers=headers, stream=True)
         response.raise_for_status()
         
