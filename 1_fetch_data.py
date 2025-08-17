@@ -23,7 +23,8 @@ def fetch_historical_data():
     for year in YEARS:
         for quarter in QUARTERS:
             # Skip future quarters (e.g., Q3, Q4 of the current year if they haven't happened yet)
-            if year == 2024 and quarter > 1:
+            # You can adjust this logic as new data becomes available.
+            if year >= 2024 and quarter > 1:
                 continue
 
             print(f"\nProcessing: {year} Q{quarter}")
@@ -41,7 +42,12 @@ def fetch_historical_data():
 
             try:
                 print(f"Downloading data from: {sec_data_url}")
-                headers = {'User-Agent': "Yash Jadhav yash918jadhav@gmail.com"}
+                
+                # --- Placeholder for User-Agent ---
+                # The SEC requests a User-Agent header for identification purposes.
+                # Replace the placeholders with your own information.
+                headers = {'User-Agent': "[Your Name or Company Name] [Your Email Address]"}
+                
                 response = requests.get(sec_data_url, headers=headers, stream=True)
                 response.raise_for_status()
 
