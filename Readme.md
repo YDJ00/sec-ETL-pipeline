@@ -159,4 +159,9 @@ Once the data is available in Athena, it is ready to be connected to any major B
 * **Microsoft Power BI**
 * **Amazon QuickSight**
 
+---
+
+## Acknowledgements
+
+The detailed comments throughout the Python source code were generated with the assistance of Google's Gemini to enhance readability and explain the implementation.
 These tools have built-in connectors for Amazon Athena, allowing you to create rich, interactive dashboards directly from your cloud data lake.
