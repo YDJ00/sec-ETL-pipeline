@@ -7,7 +7,11 @@ import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
 
 # --- Configuration ---
-S3_BUCKET_NAME = "sec-financial-data-yash-07082025" 
+# --- Placeholder for S3 Bucket Name ---
+# IMPORTANT: Before running, replace the placeholder below with the actual
+# name of the S3 bucket you created in your AWS account.
+S3_BUCKET_NAME = "[YOUR_UNIQUE_S3_BUCKET_NAME]" 
+
 PROCESSED_DATA_PATH = "processed_data"
 
 # --- Main Logic ---
@@ -45,4 +49,11 @@ def upload_historical_data_to_s3():
     print("\n--- Phase 3 Complete ---")
 
 if __name__ == "__main__":
-    upload_historical_data_to_s3()
+    if S3_BUCKET_NAME == "[YOUR_UNIQUE_S3_BUCKET_NAME]":
+        print("="*60)
+        print("!!! ACTION REQUIRED !!!")
+        print("Please open 3_upload_to_s3.py and change the S3_BUCKET_NAME")
+        print("variable to the name of the bucket you created.")
+        print("="*60)
+    else:
+        upload_historical_data_to_s3()
